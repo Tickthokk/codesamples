@@ -1,4 +1,3 @@
-codesamples
+Nicholas Wright's Code Samples
 ===========
 
-Nicholas Wright's Code Samples
