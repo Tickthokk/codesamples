@@ -1,0 +1,136 @@
+<div class = 'panel mauve' id = 'orders_mauve'>
+	<div class = 'header'>
+		<span class = 'sprite sprite_inbox'></span>
+		Orders
+	</div>
+	<div class = 'pager'>
+		Page
+		<img src = '/media/img/sprites/mauve/pager_arrow_left_off.gif' class = 'prev off'></img>
+		<input type = 'text' class = 'page' value = '1' />
+		<img src = '/media/img/sprites/mauve/pager_arrow_right_off.gif' class = 'next off'></img>
+		of
+		<span class = 'total_pages'>1</span>
+		pages
+		<span class = 'seperator'>|</span>
+		View
+		<select class = 'per_page'>
+			<option value = '5'>5</option>
+			<option value = '10'>10</option>
+			<option value = '25'>25</option>
+			<option value = '50'>50</option>
+			<option value = '100'>100</option>
+			<option value = '200'>200</option>
+		</select>
+		per page
+		<span class = 'seperator'>|</span>
+		Total
+		<span class = 'total_records'>0</span>
+		records found
+	</div>
+	
+	<table>
+		<caption>
+			<span class = 'link reset_filter fl_r'>Reset Filter</span>
+			<?php if ($twist == 'dealer') : ?>
+			<strong class = 'margin_right'>Extra Filters</strong>
+			<span class = 'link extra_filter' rel = 'shipme'>Needs Shipped</span>
+			<span class = 'seperator'>|</span>
+			<span class = 'link extra_filter' rel = 'invoiceme'>Needs Invoiced</span>
+			<span class = 'seperator'>|</span>
+			<span class = 'link extra_filter' rel = 'backordered'>Has Backordered Items</span>
+			<?php endif; ?>
+		</caption>
+		<colgroup>
+			<col rel = 'id'></col>
+			<col rel = 'date'></col>
+			<col rel = 'orderedby'></col>
+			<col rel = 'salesperson'></col>
+			<col rel = 'status'></col>
+			<col rel = 'customerpo'></col>
+			<col rel = 'items'></col>
+			<col rel = 'price'></col>
+			<col width = '63'></col>
+		</colgroup>
+		<thead>
+			<tr class = 'heading'>
+				<th rel = 'id'>
+					<div><span></span>Order #</div>
+				</th>
+				<th class = 'sort' rel = 'date'>
+					<div class = 'desc'><span></span>Date</div>
+				</th>
+				<th rel = 'orderedby'>
+					<div><span></span>Ordered By</div>
+				</th>
+				<th rel = 'salesperson'>
+					<div><span></span>Sales Person</div>
+				</th>
+				<th rel = 'status'>
+					<div><span></span>Status</div>
+				</th>
+				<th rel = 'customerpo'>
+					<div><span></span>PO#</div>
+				</th>
+				<th rel = 'items'>
+					<div><span></span>Items</div>
+				</th>
+				<th rel = 'price'>
+					<div><span></span>Total</div>
+				</th>
+				<th class = 'nosort action'>
+					<div><span></span>Action</div>
+				</th>
+			</tr>
+			<tr class = 'filter'>
+				<th rel = 'id'>
+					<input type = 'text' class = 'text_center' />
+				</th>
+				<th rel = 'date'>
+					<select>
+						<?php echo $basicDateFilter; ?>
+						<optgroup label = ' Month of'>
+							<?php echo $fe->make_select('', $fe->fix_select($orderDateFilter, 'mmyyyy', 'month_yy'), '', '', '', false, '', true); ?>
+						</optgroup>
+					</select>
+				</th>
+				<th rel = 'orderedby'>
+					<input type = 'text' />
+				</th>
+				<th rel = 'salesperson'>
+					<input type = 'text' />
+				</th>
+				<th rel = 'status'>
+					<select>
+						<option value = ''>All</option>
+						<?php if ($twist == 'dealer') : ?>
+						<option value = 'Accounting' title = 'Pending &amp; Processing'<?php echo SELECTED; ?>>Accounting</option>
+						<?php endif; ?>
+						<option value = 'Pending'>Pending</option>
+						<option value = 'Processing'>Processing</option>
+						<option value = 'Cancelled'>Cancelled</option>
+						<option value = 'Complete'>Complete</option>
+					</select>
+				</th>
+				<th rel = 'customerpo'>
+					<input type = 'text' />
+				</th>
+				<th rel = 'items'>
+					<input type = 'text' class = 'text_center' />
+				</th>
+				<th rel = 'price'>
+					<input type = 'text' class = 'text_right' />
+				</th>
+				<th class = 'action text_center'>
+					<button class = 'green filtrate'>Filter</button>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td colspan = '9' class = 'text_center w_b'>
+					To load data, press "Filter"
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

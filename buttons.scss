@@ -1,0 +1,133 @@
+/* general styles */
+body { text-rendering: optimizeLegibility; }
+
+/**
+* Adapted from http://ubuwaits.github.com/css3-buttons/
+* Molded into SASS by NWW
+*/
+
+/* Colors: A: Background From, B: Background To & Border, C: Border Bottom, D: Box-Shadow, E: Font, F: Text Shadow */
+@mixin button_basics($a: #eee, $b: #ccc, $c: #bbb, $d: #eee, $e: #333, $f: #ccc) {
+	background: $a;
+	background: -moz-linear-gradient(top, $a 0%, $b 100%);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($a), to($b));
+	border: 1px solid $b;
+	border-bottom: 1px solid $c;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: inset 0 1px 0 0 $d;
+	-webkit-box-shadow: inset 0 1px 0 0 $d;
+	box-shadow: inset 0 1px 0 0 $d;
+	color: $e;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+	/*font-size: 11px;*/
+	font-size: 12px; /* Keep in pixels, em's won't do it justice */
+	font-weight: bold;
+	line-height: 1;
+	/*padding: 8px 0;*/
+	padding: 4px 6px;
+	text-align: center;
+	text-shadow: 0 1px 0 $f;
+	/*width: 150px;*/
+}
+
+/* Hover Colors: A: Background, B: Background To, C: Box Shadow [if set, ignores D] D: Background */
+@mixin button_hover($a: #ddd, $b: #bbb, $c: 0, $d: #999) {
+	background: $a;
+	background: -moz-linear-gradient(top, $a 0%, $b 100%);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($a), to($b));
+	@if $c {
+		-moz-box-shadow: inset 0 1px 0 0 $c;
+		-webkit-box-shadow: inset 0 1px 0 0 $c;
+		box-shadow: inset 0 1px 0 0 $c;
+	} @else {
+		border: 1px solid $b;
+		border-bottom: 1px solid $d;
+	}
+	cursor: pointer;
+	text-shadow: 0 1px 0 $a;
+}
+
+/* Active Color: A: Border/Shadow Inset 1, B: Shadow Inset 2, C: Border Bottom */ 
+@mixin button_active($a: #aaa, $b: #eee, $c: #888) {
+	border: 1px solid $a;
+	border-bottom: 1px solid $c;
+	-moz-box-shadow: inset 0 0 5px 2px $a, 0 1px 0 0 $b;
+	-webkit-box-shadow: inset 0 0 5px 2px $a, 0 1px 0 0 $b;
+	box-shadow: inset 0 0 5px 2px $a, 0 1px 0 0 $b;
+	position: relative;
+	top: 1px;
+}
+
+@mixin disabled($a: #999, $b: #ccc) {
+	background: $a;
+	border: 0;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	color: $b;
+	cursor: not-allowed;
+	text-shadow: none;
+}
+
+button {
+	&:hover { cursor: pointer; }
+	&:focus { text-decoration: underline; }
+	&::-moz-focus-inner { border: 0; }
+	&.hasSprite { line-height: 16px !important; }
+	
+	/* Color Definitions */
+	/* Main Colors: A: Background From, B: Background To & Border, C: Border Bottom, D: Box-Shadow, E: Font, F: Text Shadow */
+	/* Hover Colors: A: Background, B: Background To, C: Box Shadow [if set, ignores D] D: Background */
+	/* Active Color: A: Border/Shadow Inset 1, B: Shadow Inset 2, C: Border Bottom */
+	
+	&.gray {
+		@include button_basics();
+		&:hover { @include button_hover(); }
+		&:active { @include button_active(); }
+	}
+	&.red {
+		@include button_basics(#d55659, #b93d3b, #b13037, #ec6179, #fff, #a2272d);
+		&:hover { @include button_hover(#cc4a53, #b4353a, #e35673); }
+		&:active { @include button_active(#b13037, #b93d3b, #a92333); }
+	}
+	&.green {
+		@include button_basics(#7fbf4d, #63a62f, #5b992b, #96ca6d, #fff, #4c9021);
+		&:hover { @include button_hover(#76b347, #5e9e2e, #8dbf67); }
+		&:active { @include button_active(#5b992b, #63a62f, #538c27); }
+	}
+	&.darkblue {
+		@include button_basics(#3f668c, #234d6e, #1b406a, #5671ac, #fff, #0c3760);
+		&:hover { @include button_hover(#365a86, #1e456d, #4d66a6); }
+		&:active { @include button_active(#1b406a, #234d6e, #133366); }
+	}
+	&.blue {
+		@include button_basics(#749dc6, #5884a8, #5077a4, #8ba8e6, #fff, #416e9a);
+		&:hover { @include button_hover(#6b91c0, #537ca7, #829de0); }
+		&:active { @include button_active(#5077a4, #5884a8, #486aa0); }
+	}
+	&.yellow {
+		@include button_basics(#fffd62, #e3e444, #dbd740, #ffff82, #333, #ccce36);
+		&:hover { @include button_hover(#f6f15c, #dedc43, #fffd7c); }
+		&:active { @include button_active(#dbd740, #e3e444, #d3ca3c); }
+	}
+	
+	/* Size Definitions */
+	&.medium {
+		padding: 2px 4px;
+		font-family: Verdana, sans-serif !important;
+		font-size: 11px !important; /* Keep in pixels, em's won't do it justice */
+	}
+	&.small {
+		font-size: 8.5px !important; /* Keep in pixels, em's won't do it justice */
+		padding: 1px 3px;
+	}
+	
+	/* Disabled - Keep As Last */
+	&[disabled] {
+		&:hover { @extend [disabled]; }
+		&:active { @extend [disabled]; top: 0 !important; }
+		@include disabled();
+	}
+}
